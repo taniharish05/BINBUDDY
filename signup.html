@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BinBuddy | Sign Up</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(to right, #1c4d42, #81b69b);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-box {
+            background: white;
+            width: 400px;
+            max-width: 90%;
+            padding: 40px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1c4d42;
+            margin-bottom: 10px;
+        }
+
+        .logo span {
+            color: #78a85c;
+        }
+
+        h2 {
+            color: #1c4d42;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #61bba6;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background-color: #246b45;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #153f2b;
+        }
+
+        p {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #246b45;
+            font-weight: bold;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signup-box">
+
+        <div class="logo">♻ Bin<span>Buddy</span></div>
+
+        <h2>Create Your Account</h2>
+
+        <p class="subtitle">
+            Join BinBuddy and start making a difference.
+        </p>
+
+        <form onsubmit="return registerUser()">
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Full Name"
+                required
+            >
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Email Address"
+                required
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+            >
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                required
+            >
+
+            <button type="submit">Create Account</button>
+
+        </form>
+
+        <p>
+            Already have an account?
+            <a href="/login">Login</a>
+        </p>
+
+        <a href="/" class="back">← Back to Home</a>
+
+    </div>
+
+
+    <script>
+        function registerUser() {
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value;
+            let confirmPassword =
+                document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return false;
+            }
+
+            if (localStorage.getItem(email)) {
+                alert("Account already exists! Please login.");
+                return false;
+            }
+
+            let user = {
+                name: name,
+                email: email,
+                password: password
+            };
+
+            // Save user information
+            localStorage.setItem(email, JSON.stringify(user));
+
+            alert("Registration Successful! Please login.");
+
+            // GO TO LOGIN PAGE
+            window.location.href = "/login";
+
+            return false;
+        }
+    </script>
+
+</body>
+</html>
